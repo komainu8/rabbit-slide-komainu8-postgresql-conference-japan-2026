@@ -1,0 +1,30 @@
+= 意味で検索することで表記揺れは解決できるのでしょうか？
+
+: author
+   堀本 泰弘
+: institution
+   株式会社クリアコード
+: content-source
+   PostgreSQL Conference Japan 2026
+: date
+   2026-11-27
+: allotted-time
+   5m
+: start-time
+   2026-11-27T16:20:00+09:00
+: end-time
+   2026-11-27T17:10:00+09:00
+: theme
+   .
+
+= 最初のスライド
+
+  * 項目1
+  * 項目2
+  * 項目3
+
+= 二番目のスライド
+
+  # image
+  # src = https://raw.github.com/rabbit-shocker/rabbit/master/sample/lavie.png
+  # relative_height = 100

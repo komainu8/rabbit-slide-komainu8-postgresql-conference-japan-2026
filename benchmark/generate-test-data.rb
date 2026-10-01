@@ -99,8 +99,6 @@ def generate_evaluated_csv(target_count = 30, output_file = 'search_test_evaluat
       ]
     end
   end
-
-  puts "✅ 判定基準・理由付きの検証データセットを #{target_count} 件作成しました (#{output_file})"
 end
 
 generate_evaluated_csv(30)

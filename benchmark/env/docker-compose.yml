@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # --- pgvector (PostgreSQL 18) ---
+  pgvector-db:
+    build:
+      context: ./pgvector
+      dockerfile: Dockerfile
+    container_name: pgvector_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P@ssw0rd!
+      POSTGRES_DB: vector_test_db
+    ports:
+      - "5432:5432"
+
+  # --- PGroonga (PostgreSQL 18) ---
+  pgroonga-db:
+    build:
+      context: ./pgroonga
+      dockerfile: Dockerfile
+    container_name: pgroonga_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P@ssw0rd!
+      POSTGRES_DB: pgroonga_test_db
+    ports:
+      - "5433:5432"

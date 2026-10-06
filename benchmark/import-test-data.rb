@@ -8,17 +8,17 @@ databases = [
 ]
 
 create_table_sql = <<~SQL
-  DROP TABLE IF EXISTS search_test_evaluated;
+DROP TABLE IF EXISTS search_test_evaluated;
 
-  CREATE TABLE search_test_evaluated (
-    id              integer PRIMARY KEY,
-    category        text,
-    subcategory     text,
-    query           text,
-    target_document text,
-    expected_match  boolean,
-    result_label    text,
-    judgment_reason text
+CREATE TABLE search_test_evaluated (
+  id              integer PRIMARY KEY,
+  category        text,
+  subcategory     text,
+  query           text,
+  target_document text,
+  expected_match  boolean,
+  result_label    text,
+  judgment_reason text
 );
 SQL
 
@@ -40,9 +40,9 @@ databases.each do |container, database|
   ) || abort("Failed to copy CSV")
 
   sql = <<~SQL
-    COPY search_test_evaluated
-    FROM '#{container_file}'
-    WITH (FORMAT csv, HEADER true);
+COPY search_test_evaluated
+FROM '#{container_file}'
+WITH (FORMAT csv, HEADER true);
   SQL
 
   system(
@@ -50,6 +50,30 @@ databases.each do |container, database|
     "psql", "-U", "postgres", "-d", database,
     "-c", sql
   ) || abort("Failed to import CSV")
+
+  # Create Index
+  index_sql =
+    if container == "pgroonga_db"
+      <<~SQL
+        CREATE INDEX search_test_evaluated_target_document_pgroonga_idx
+          ON search_test_evaluated
+          USING pgroonga (target_document);
+      SQL
+#    elsif container == "pgvector_db"
+#      <<~SQL
+#        CREATE INDEX search_test_evaluated_embedding_hnsw_idx
+#          ON search_test_evaluated
+#          USING hnsw (embedding vector_cosine_ops);
+#      SQL
+    end
+
+  if index_sql
+    system(
+      "podman", "exec", container,
+      "psql", "-U", "postgres", "-d", database,
+      "-c", index_sql
+    ) || abort("Failed to create index")
+  end
 
   system(
     "podman", "exec", container,

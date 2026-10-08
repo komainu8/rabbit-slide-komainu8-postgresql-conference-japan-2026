@@ -55,9 +55,11 @@ WITH (FORMAT csv, HEADER true);
   index_sql =
     if container == "pgroonga_db"
       <<~SQL
-        CREATE INDEX search_test_evaluated_target_document_pgroonga_idx
+        CREATE INDEX IF NOT EXISTS pgroonga_semantic_index
           ON search_test_evaluated
-          USING pgroonga (target_document);
+          USING pgroonga (target_document pgroonga_text_semantic_search_ops_v2)
+           WITH (plugins = 'language_model/knn',
+                 model = 'hf:///Qwen/Qwen3-Embedding-8B-GGUF');
       SQL
 #    elsif container == "pgvector_db"
 #      <<~SQL

@@ -5,3 +5,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN echo "CREATE EXTENSION IF NOT EXISTS vector;" > /docker-entrypoint-initdb.d/10_vector.sql
+RUN echo "CREATE EXTENSION IF NOT EXISTS pgroonga;" >> /docker-entrypoint-initdb.d/10_vector.sql

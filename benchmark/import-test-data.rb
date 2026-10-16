@@ -3,6 +3,7 @@
 file = File.expand_path(ARGV.fetch(0, "search_test_evaluated.csv"))
 
 databases = [
+  ["postgresql_db", "postgresql_test_db"],
   ["pgvector_db", "vector_test_db"],
   ["pgroonga_db", "pgroonga_test_db"]
 ]
@@ -12,13 +13,8 @@ DROP TABLE IF EXISTS search_test_evaluated;
 
 CREATE TABLE search_test_evaluated (
   id              integer PRIMARY KEY,
-  category        text,
-  subcategory     text,
-  query           text,
   target_document text,
-  expected_match  boolean,
-  result_label    text,
-  judgment_reason text
+  embedding vector(384)
 );
 SQL
 
@@ -53,7 +49,12 @@ WITH (FORMAT csv, HEADER true);
 
   # Create Index
   index_sql =
-    if container == "pgroonga_db"
+    if container == "postgresql_db"
+      <<~SQL
+        CREATE INDEX IF NOT EXISTS postgresql_index
+          ON search_test_evaluated USING gin (target_document);
+      SQL
+    elsif container == "pgroonga_db"
       <<~SQL
         CREATE INDEX IF NOT EXISTS pgroonga_semantic_index
           ON search_test_evaluated
@@ -61,12 +62,12 @@ WITH (FORMAT csv, HEADER true);
            WITH (plugins = 'language_model/knn',
                  model = 'hf:///Qwen/Qwen3-Embedding-8B-GGUF');
       SQL
-#    elsif container == "pgvector_db"
-#      <<~SQL
-#        CREATE INDEX search_test_evaluated_embedding_hnsw_idx
-#          ON search_test_evaluated
-#          USING hnsw (embedding vector_cosine_ops);
-#      SQL
+    elsif container == "pgvector_db"
+      <<~SQL
+        CREATE INDEX embedding_hnsw_idx
+          ON search_test_evaluated
+          USING hnsw (embedding vector_cosine_ops);
+      SQL
     end
 
   if index_sql

@@ -8,12 +8,12 @@
    PostgreSQL Conference Japan 2026
 : date
    2026-11-27
-: allotted-time
-   45m
-: start-time
-   2026-11-27T16:20:00+09:00
-: end-time
-   2026-11-27T17:10:00+09:00
+#: allotted-time
+#   45m
+#: start-time
+#   2026-11-27T16:20:00+09:00
+#: end-time
+#   2026-11-27T17:10:00+09:00
 : theme
    .
 
@@ -27,7 +27,7 @@
 
   # image
   # src = images/problem_spelling_variation.png
-  # relative_height = 90
+  # relative_height = 100
 
 = 表記揺れの問題
 
@@ -38,7 +38,7 @@
 
   # image
   # src = images/resolved_methods.png
-  # relative_height = 90
+  # relative_height = 100
 
 = 解決方法と対策
 
@@ -61,12 +61,12 @@
 
   # image
   # src = images/test_scope.png
-  # relative_height = 99
+  # relative_height = 100
 
 = 検証：検証項目
 
 (1) 表記や表現が異なっても、意図した文書を検索できるか
-(2) 意味の近い別の文書を誤って返さない
+(2) 意味の近い別の文書を誤って返さないか
 (3) 正規化・辞書による方法と意味による検索で、得意・不得意に違いがあるか
 (4) PGroongaとpgvectorで、同じモデルを使っても順位や検索結果が変わるか
 
@@ -74,7 +74,7 @@
 
   # image
   # src = images/four_search_methods.png
-  # relative_height = 99
+  # relative_height = 100
 
 = 検証：比較条件
 

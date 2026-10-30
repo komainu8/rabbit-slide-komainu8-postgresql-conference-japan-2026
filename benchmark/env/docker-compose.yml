@@ -30,12 +30,12 @@ services:
   # --- PostgreSQL 18 ---
   postgresql-db:
     build:
-      context: ./postgres
+      context: ./postgresql
       dockerfile: Dockerfile
-    container_name: postgres_db
+    container_name: postgresql_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: P@ssw0rd!
-      POSTGRES_DB: postgres_test_db
+      POSTGRES_DB: postgresql_test_db
     ports:
       - "5434:5432"

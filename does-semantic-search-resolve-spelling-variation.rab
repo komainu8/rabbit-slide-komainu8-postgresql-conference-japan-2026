@@ -65,11 +65,15 @@
   # src = images/resolved_normalizer.png
   # relative_height = 100
 
+= 正規化の特徴と限界
+
 = 辞書
 
   # image
   # src = images/resolved_dic.png
   # relative_height = 100
+
+= 辞書の特徴と限界
 
 = 意味での検索
 
@@ -77,9 +81,12 @@
   # src = images/resolved_semantic.png
   # relative_height = 100
 
-= 検証
+= 意味での検索の検証
 
-* 「正規化・辞書による検索」と「意味検索」\n結果にどのような違いがあるのか？
+(1) 正規化や辞書で発見できるケースを発見できるか
+(2) 正規化や辞書で発見できないケースを発見できるか
+(3) 文脈を理解して検索できるか
+(4) PGroongaとpgvectorで、同じモデルを使っても順位や検索結果が変わるか
 
 = 検証
 

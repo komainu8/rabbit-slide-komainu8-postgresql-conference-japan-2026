@@ -8,43 +8,74 @@
    PostgreSQL Conference Japan 2026
 : date
    2026-11-27
-#: allotted-time
-#   45m
-#: start-time
-#   2026-11-27T16:20:00+09:00
-#: end-time
-#   2026-11-27T17:10:00+09:00
+: allotted-time
+   45m
+: start-time
+   2026-11-27T16:20:00+09:00
+: end-time
+   2026-11-27T17:10:00+09:00
 : theme
    .
 
 = 目次
 
 (1) 表記揺れの問題
-(2) 解決方法と対策
+(2) 解決方法
 (3) 検証
 
 = 表記揺れの問題
 
   # image
-  # src = images/problem_spelling_variation.png
-  # relative_height = 100
+  # src = images/problem_spelling_variation-split1.png
+  # relative_height = 65
+
+= 表記揺れの問題
+
+なぜか？
+
+= 表記揺れの問題
+
+* 表記が違うから
+* 単純な文字列一致ではヒットしない
+
+= 表記揺れの問題
+
+  # image
+  # src = images/problem_spelling_variation-split2.png
+  # relative_height = 52
 
 = 表記揺れの問題
 
 * ユーザーが知りたいことと、文書に書かれている表現は必ずしも一致しない
 * 自然言語なので、同じ意味でも表現が異なることはよくある
 
-= 解決方法と対策
+= 表記揺れの問題
+
+ではどうするのか？
+
+= 解決方法
+
+* 正規化
+* 辞書
+* 意味での検索
+
+= 正規化
 
   # image
-  # src = images/resolved_methods.png
+  # src = images/resolved_normalizer.png
   # relative_height = 100
 
-= 解決方法と対策
+= 辞書
 
-* 従来は正規化と辞書を用いて解決
-* 近年は意味で検索する方法も表現が異なる\n文書を発見する手段に
-* しかし、意味での検索は正規化や辞書の単純な上位互換ではない
+  # image
+  # src = images/resolved_dic.png
+  # relative_height = 100
+
+= 意味での検索
+
+  # image
+  # src = images/resolved_semantic.png
+  # relative_height = 100
 
 = 検証
 

@@ -134,7 +134,7 @@
 
 = 追加の検証
 
-(4) PGroongaとpgvectorで同じモデルを\n使っても順位や検索結果が変わるか
+(4) pgvectorとPGroongaで同じモデルを\n使っても順位や検索結果が変わるか
 
 = 検証環境
 
@@ -148,7 +148,7 @@
 
 = 検証(1): 大文字・小文字、半角・全角
 
-PGroongaとpgvectorの比較
+pgvectorとPGroongaの比較
 
 = 検証(1): 大文字・小文字、半角・全角
 
@@ -166,7 +166,7 @@ PGroongaとpgvectorの比較
 
 = 検証(1): 異体字
 
-PGroongaとpgvectorの比較
+pgvectorとPGroongaの比較
 
 = 検証(1): 異体字
 
@@ -196,7 +196,7 @@ PGroongaとpgvectorの比較
 
 = 検証(1): 同義語
 
-PGroongaとpgvectorの比較
+pgvectorとPGroongaの比較
 
 = 検証(3): 文脈を踏まえた検索
 

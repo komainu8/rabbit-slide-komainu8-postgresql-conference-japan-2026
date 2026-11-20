@@ -30,7 +30,7 @@
 = 表記揺れの問題
 
   # image
-  # src = images/problem_spelling_variation-split1.png
+  # src = images/problem_spelling_variation.png
   # relative_height = 65
 
 = 表記揺れの問題
@@ -154,23 +154,33 @@
 
 = 検証(1): 異体字
 
-異体字もヒットするか？
+  # image
+  # src = images/test-01-itaiji.png
+  # relative_height = 100
 
 = 検証(1): 同義語
 
-同義語もヒットするか？
+  # image
+  # src = images/test-01-synonym.png
+  # relative_height = 100
 
 = 検証(1): 数字・単位の表記
 
-数字・単位の表記の違いを無視できるか？
+  # image
+  # src = images/test-01-number-unit.png
+  # relative_height = 100
 
 = 検証(1): 入力ミス・誤記
 
-入力ミスや誤記があってもヒットするか？
+  # image
+  # src = images/test-01-typo.png
+  # relative_height = 100
 
 = 検証(1): カタカナ・英字の表記の揺れ
 
-大文字、小文字、半角・全角の違いを無視できるか？
+  # image
+  # src = images/test-01-upper-case.png
+  # relative_height = 100
 
 = 検証(2): 正規化・辞書・ファジー検索で対応しにくい検索
 
@@ -179,6 +189,12 @@
 = 検証(2): 正規化・辞書・ファジー検索で対応しにくい検索
 
 例：接続できない -> コネクションプール枯渇
+
+= 検証(2): 正規化・辞書・ファジー検索で対応しにくい検索
+
+  # image
+  # src = images/test-02-diff-lang.png
+  # relative_height = 100
 
 = 検証(3): 文脈を踏まえた検索
 
@@ -191,7 +207,7 @@
 = まとめ
 
 * 大文字、小文字程度なら正規化で十分
-* セマンティックサーチはオーバスペックなときもある
+* セマンティックサーチだとノイズも多いことがある
 * 辞書と正規化ですむならそれでいい
 * 未知の言い換え、文脈を踏まえた検索が大事ならセマンティックサーチを検討
 

@@ -1,0 +1,59 @@
+services:
+  postgres:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    image: localhost/redmine-postgres:18-pgroonga-pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: redmine
+      POSTGRES_USER: redmine
+      POSTGRES_PASSWORD: redmine
+    volumes:
+    - postgres_data:/var/lib/postgresql
+    - ./models/groonga/language_models:/usr/share/groonga/language_models:ro
+    networks:
+    - redmine_net
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready --host=127.0.0.1 --port=5432 --username="$$POSTGRES_USER" --dbname="$$POSTGRES_DB"
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 15s
+  redmine:
+    build:
+      context: ./redmine
+      dockerfile: Dockerfile
+      args:
+        FULL_TEXT_SEARCH_PLUGIN_REF: master
+    image: localhost/redmine:7.0.3-full-text-search
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+    - 127.0.0.1:3000:3000
+    environment:
+      REDMINE_DB_POSTGRES: postgres
+      REDMINE_DB_PORT: 5432
+      REDMINE_DB_DATABASE: redmine
+      REDMINE_DB_USERNAME: redmine
+      REDMINE_DB_PASSWORD: redmine
+      REDMINE_PLUGINS_MIGRATE: '1'
+    volumes:
+    - redmine_files:/usr/src/redmine/files
+    - ./scripts:/opt/redmine-import/scripts:ro
+    - ../benchmark/redmine_dataset/documents.csv:/opt/redmine-import/data/documents.csv:ro
+    networks:
+    - redmine_net
+networks:
+  redmine_net:
+    name: redmine-host-only
+    driver: bridge
+    driver_opts:
+      no_default_route: 'true'
+volumes:
+  postgres_data: null
+  redmine_files: null

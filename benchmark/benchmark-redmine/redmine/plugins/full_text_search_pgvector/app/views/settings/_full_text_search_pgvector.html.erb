@@ -1,0 +1,14 @@
+<p>
+  <%= label_tag("settings[semantic_backend]", "セマンティック検索エンジン") %>
+  <%= select_tag("settings[semantic_backend]",
+                 options_for_select(
+                   [["PGroonga", "pgroonga"], ["pgvector", "pgvector"]],
+                   settings["semantic_backend"] || "pgroonga"
+                 )) %>
+</p>
+<p class="info">
+  pgvectorを選択すると、Full Text Searchプラグインの検索画面で
+  「セマンティック検索」を有効にしたときにpgvectorを使います。
+  4096次元ベクトルをバイナリ量子化したHNSWインデックスで候補検索し、
+  元ベクトルのコサイン距離で再ランキングします。対象はRedmineのチケットです。
+</p>

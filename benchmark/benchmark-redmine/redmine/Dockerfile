@@ -7,8 +7,10 @@ WORKDIR /usr/src/redmine
 
 # Install Git only while building the custom Redmine image.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git \
+    && apt-get install -y --no-install-recommends git libffi-dev pkg-config build-essential \
     && rm -rf /var/lib/apt/lists/*
+
+RUN echo "gem 'fiddle'" >> /usr/src/redmine/Gemfile
 
 # Install the full-text-search plugin.
 RUN git clone --depth 1 --branch "${FULL_TEXT_SEARCH_PLUGIN_REF}" \

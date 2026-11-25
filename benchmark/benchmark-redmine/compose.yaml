@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: redmine
     volumes:
     - postgres_data:/var/lib/postgresql
-    - ./models/groonga/language_models:/usr/share/groonga/language_models:ro
+    - ./models/groonga/language_models:/usr/share/groonga/language_models:Z
     networks:
     - redmine_net
     healthcheck:
@@ -44,8 +44,8 @@ services:
       REDMINE_PLUGINS_MIGRATE: '1'
     volumes:
     - redmine_files:/usr/src/redmine/files
-    - ./scripts:/opt/redmine-import/scripts:ro
-    - ../benchmark/redmine_dataset/documents.csv:/opt/redmine-import/data/documents.csv:ro
+    - ./scripts:/opt/redmine-import/scripts:Z
+    - ../benchmark/redmine_dataset/documents.csv:/opt/redmine-import/data/documents.csv:Z
     networks:
     - redmine_net
 networks:

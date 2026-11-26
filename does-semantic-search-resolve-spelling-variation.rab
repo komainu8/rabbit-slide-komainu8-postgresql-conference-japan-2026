@@ -272,6 +272,12 @@
   * ベクトルを量子化して保持することでメモリー使用量を抑えられる
   * 検索範囲などの設定によって速度と再現率が\n変化する
 
+= まとめ
+
+  # image
+  # src = images/matome-summary.png
+  # relative_height = 100
+
 = まとめ：使い分け
 
   # image
